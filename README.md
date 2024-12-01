@@ -15,11 +15,3 @@ Advent of Code is an Advent calendar of small programming puzzles for a variety 
 You can play along on the [Advent of Code website](https://adventofcode.com).
 
 ## Solutions
-
-My solutions for each year are available on the relevant branches within this repository.
-
-* [2022](https://github.com/Oliver-Binns/Advent-of-Code/tree/2022)
-* [2021](https://github.com/Oliver-Binns/Advent-of-Code/tree/2021)
-* [2020](https://github.com/Oliver-Binns/Advent-of-Code/tree/2020)
-
-## Wishing you a very Merry Christmas and a Happy New Year!
