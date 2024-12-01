@@ -1,6 +1,6 @@
 # Advent Of Code
 
-This repo uses the template created by Oliver Binns.
+This repo uses the template created by [Oliver Binns](https://github.com/oliver-binns/advent-of-code).
 
 ## Template
 
