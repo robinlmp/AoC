@@ -63,12 +63,8 @@ struct Runner {
         let start = Date()
         print("\t\(note): ", calculate())
         let end = Date()
-
-  
         let duration = end.timeIntervalSince(start)
-//        let str = timeFormatter.localizedString(fromTimeInterval: end.timeIntervalSince(start.advanced(by: -12400)))
         let str = timeFormatter.string(from: duration)
-        
         print("\tin: ", str ?? "")
     }
     
