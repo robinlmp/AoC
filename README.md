@@ -1,5 +1,7 @@
 # Advent Of Code
 
+This repo uses the template created by Oliver Binns.
+
 ## Template
 
 This is a template for you to complete Advent of Code using Swift.
