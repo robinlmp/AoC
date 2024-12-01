@@ -65,7 +65,8 @@ struct Runner {
         let end = Date()
         let duration = end.timeIntervalSince(start)
         let str = timeFormatter.string(from: duration)
-        print("\tin: ", str ?? "")
+        let milliseconds = String(format: "%.2f", duration * 1000)
+        print("\tin: ", str ?? "", "(\(milliseconds) ms)")
     }
     
     private static func getInputString(filename: String) throws -> String {
