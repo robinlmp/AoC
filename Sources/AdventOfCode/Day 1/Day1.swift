@@ -38,11 +38,13 @@ extension Day1 {
     struct Pairs {
         let pairs: [[Int]]
         
-        var leftList: [Int] {
-            pairs.compactMap(\.first).sorted()
-        }
-        var rightList: [Int] {
-            pairs.compactMap(\.last).sorted()
+        let leftList: [Int]
+        let rightList: [Int]
+        
+        init(pairs: [[Int]]) {
+            self.pairs = pairs
+            self.leftList = pairs.compactMap(\.first).sorted()
+            self.rightList = pairs.compactMap(\.last).sorted()
         }
         
         func differenceAt(index: Int) -> Int {
