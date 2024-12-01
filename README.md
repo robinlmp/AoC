@@ -17,3 +17,5 @@ Advent of Code is an Advent calendar of small programming puzzles for a variety 
 You can play along on the [Advent of Code website](https://adventofcode.com).
 
 ## Solutions
+
+[2024](https://github.com/robinlmp/AoC/tree/2024)
