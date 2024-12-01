@@ -1,5 +1,3 @@
-import Algorithms
-
 struct Day1: Solution {
     static let day = 1
     let pairs: Pairs
