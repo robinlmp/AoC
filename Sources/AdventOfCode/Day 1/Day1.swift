@@ -15,7 +15,6 @@ struct Day1: Solution {
                 .map {
                     $0.components(separatedBy: .whitespaces)
                         .compactMap(Int.init)
-                    
                 }
         )
     }
@@ -37,7 +36,6 @@ struct Day1: Solution {
 extension Day1 {
     struct Pairs {
         let pairs: [[Int]]
-        
         let leftList: [Int]
         let rightList: [Int]
         
