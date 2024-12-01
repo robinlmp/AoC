@@ -16,7 +16,7 @@ let package = Package(
         
         // Sequence and collection algorithms
         // i.e. rotations, permutations, etc.
-        //.package(url: "https://github.com/apple/swift-algorithms", from: "1.0.0"),
+        .package(url: "https://github.com/apple/swift-algorithms", from: "1.2.0"),
         
         // Extra data structure implementations
         // i.e. OrderedSet, Deque, Heap
@@ -27,7 +27,13 @@ let package = Package(
         //.package(url: "https://github.com/apple/swift-numerics", from: "1.0.0"),
     ],
     targets: [
-        .executableTarget(name: "AdventOfCode", resources: inputFiles),
+        .executableTarget(
+            name: "AdventOfCode",
+            dependencies: [
+                .product(name: "Algorithms", package: "swift-algorithms"),
+            ],
+            resources: inputFiles
+        ),
         .testTarget(name: "AdventOfCodeTests", dependencies: ["AdventOfCode"], resources: inputFiles)
     ]
 )
