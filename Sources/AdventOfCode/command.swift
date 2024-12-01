@@ -2,6 +2,15 @@ import Foundation
 
 @main
 struct Runner {
+    static var timeFormatter: DateComponentsFormatter {
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.hour, .minute, .second]
+        formatter.maximumUnitCount = 2
+        formatter.unitsStyle = .short
+        formatter.zeroFormattingBehavior = .pad
+        return formatter
+    }
+    
     static func main() throws {
         try [
             Day1.self,
@@ -54,9 +63,13 @@ struct Runner {
         let start = Date()
         print("\t\(note): ", calculate())
         let end = Date()
+
+  
         let duration = end.timeIntervalSince(start)
+//        let str = timeFormatter.localizedString(fromTimeInterval: end.timeIntervalSince(start.advanced(by: -12400)))
+        let str = timeFormatter.string(from: duration)
         
-        print("\tin: ", duration, " seconds")
+        print("\tin: ", str ?? "")
     }
     
     private static func getInputString(filename: String) throws -> String {
