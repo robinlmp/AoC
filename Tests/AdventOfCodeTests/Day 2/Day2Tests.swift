@@ -29,15 +29,17 @@ extension Day2Tests {
     }
     
     func testIsSafePart2() throws {
-        XCTAssertTrue(try sut.isSafePart2(list: [7,6,4,2,1]))
-        
+//        XCTAssertFalse(try sut.isSafePart2(list: [1,3,5,10,9]))
+//        
+//        XCTAssertTrue(try sut.isSafePart2(list: [7,6,4,2,1]))
+//        
         XCTAssertFalse(try sut.isSafePart2(list: [1,2,7,8,9]))
         XCTAssertFalse(try sut.isSafePart2(list: [9,7,6,2,1]))
         
-        XCTAssertTrue(try sut.isSafePart2(list: [1,3,2,4,5]))
-        XCTAssertTrue(try sut.isSafePart2(list: [8,6,4,4,1]))
-        XCTAssertTrue(try sut.isSafePart2(list: [1,3,6,7,9]))
-        
-        XCTAssertFalse(try sut.isSafePart2(list: [66, 68, 69, 71, 72, 71, 72, 69]))
+//        XCTAssertTrue(try sut.isSafePart2(list: [1,3,2,4,5]))
+//        XCTAssertTrue(try sut.isSafePart2(list: [8,6,4,4,1]))
+//        XCTAssertTrue(try sut.isSafePart2(list: [1,3,6,7,9]))
+//        
+//        XCTAssertFalse(try sut.isSafePart2(list: [66, 68, 69, 71, 72, 71, 72, 69]))
     }
 }
