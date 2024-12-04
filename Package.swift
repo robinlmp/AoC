@@ -1,4 +1,4 @@
-// swift-tools-version: 5.6
+// swift-tools-version: 6.0
 import PackageDescription
 
 let inputFiles: [Resource] = (1...25)
@@ -8,8 +8,8 @@ let inputFiles: [Resource] = (1...25)
 let package = Package(
     name: "AdventOfCode",
     platforms: [
-        .iOS(.v15),
-        .macOS(.v12)
+        .iOS(.v18),
+        .macOS(.v15)
     ],
     dependencies: [
         // Some recommended packages here, you might like to try them!
