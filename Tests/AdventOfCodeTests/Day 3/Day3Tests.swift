@@ -23,7 +23,7 @@ final class Day3Tests: XCTestCase, SolutionTest {
     }
     
     func testRanges() throws {
-        let string = "12mul(12,134)8do()90mul(0,742)fsdon't()fgrw33"
+        let string = "12domul(12,134)8do()90mul(0,742)fsdon't()fgrw33"
         
         guard let mulRegex = try sut.mulRegex,
               let doRegex = try sut.doRegex,
@@ -37,16 +37,8 @@ final class Day3Tests: XCTestCase, SolutionTest {
         let doRanges = string.ranges(of: doRegex)
         let dontRanges = string.ranges(of: dontRegex)
         
-        if let upperBound = ranges.first?.upperBound {
-            print("upper bound: ",
-                  string.distanceFromStart(to: upperBound)
-            )
-        }
-    }
-    
-    func testArrayCreation() throws {
-        let operators = try sut.extractOperators(input: try sut.input)
-        
-        dump(operators)
+        XCTAssertEqual(string.distanceFromStart(to: ranges[1].lowerBound), 22)
+        XCTAssertEqual(string.distanceFromStart(to: doRanges[0].lowerBound), 16)
+        XCTAssertEqual(string.distanceFromStart(to: dontRanges[0].lowerBound), 34)
     }
 }
