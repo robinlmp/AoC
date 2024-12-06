@@ -18,11 +18,13 @@ struct Day4: Solution {
     }
 
     func calculatePartOne() -> Int {
-        findXs(input: letters)
+        return 0
+//        findXs(input: letters)
     }
     
     func calculatePartTwo() -> Int {
-        findAs(input: letters)
+        return 0
+//        findAs(input: letters)
     }
 }
 
@@ -107,7 +109,7 @@ extension Day4 {
             if letter?.letter == "M",
                 let letterM = letter {
                 if let letterA = findAdjacentLetters(letter: letterM, direction: direction, adjacentLetter: "A") {
-                    if let letterS = findAdjacentLetters(letter: letterA, direction: direction, adjacentLetter: "S") {
+                    if findAdjacentLetters(letter: letterA, direction: direction, adjacentLetter: "S") != nil {
                         return 1
                     }
                 }
