@@ -70,8 +70,6 @@ extension Day5 {
                 return true
             }
         }
-        print("update: ", update)
-        print("temp: ", temp, "\n")
         return temp[(temp.count / 2)]
     }
     
