@@ -13,12 +13,12 @@ struct Runner {
     
     static func main() throws {
         try [
-            Day1.self,
-            Day2.self,
-            Day3.self,
-            Day4.self,
-            Day5.self,
-            Day6.self,
+//            Day1.self,
+//            Day2.self,
+//            Day3.self,
+//            Day4.self,
+//            Day5.self,
+//            Day6.self,
             Day7.self,
             Day8.self,
             Day9.self,
