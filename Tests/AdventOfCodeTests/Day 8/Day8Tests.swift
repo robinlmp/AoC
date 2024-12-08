@@ -9,7 +9,7 @@ final class Day8Tests: XCTestCase, SolutionTest {
     }
     
     func testPartTwo() throws {
-        try XCTAssertEqual(sut.calculatePartTwo(), 0)
+        try XCTAssertEqual(sut.calculatePartTwo(), 34)
     }
 }
 

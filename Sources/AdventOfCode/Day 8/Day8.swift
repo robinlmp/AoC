@@ -35,12 +35,12 @@ struct Day8: Solution {
     }
     
     func calculatePartTwo() -> Int {
-        0
+        setAntiNodes(partTwo: true).count
     }
 }
 
 extension Day8 {
-    func setAntiNodes() -> Set<Location> {
+    func setAntiNodes(partTwo: Bool = false) -> Set<Location> {
         let transmitterLocations = transmitterTypes
             .map {
                 self.transmitterLocations(for: $0)
@@ -50,27 +50,53 @@ extension Day8 {
             .flatMap { transmittersOfType in
                 transmittersOfType
                     .compactMap { transmitterA in
-                        transmittersOfType.map { transmitterB in
-                            var tempResult: Set<Location> = []
-                            
-                            if transmitterA != transmitterB {
-//                                let distance = transmitterA.distanceTo(transmitterB)
+                        transmittersOfType
+                            .filter { $0 != transmitterA }
+                            .map { transmitterB in
+                                var tempResult: Set<Location> = []
+
+                                let distance = transmitterA.distanceTo(transmitterB)
                                 let locations = transmitterA.antiNodeLocationsFor(transmitterB)
+
+                                var forward = (transmitterA.x, transmitterA.y) + distance
+                                var backward = (transmitterA.x, transmitterA.y) - distance
                                 
-                                if isValidGridPosition(gridBounds: boundsMax, location: locations.0) {
-                                    let existing = grid[locations.0.1][locations.0.0]
+                                var isInBoundsA = isValidGridPosition(gridBounds: boundsMax, location: locations.0)
+                                var isInBoundsB = isValidGridPosition(gridBounds: boundsMax, location: locations.1)
+                                
+                                let nodeA = transmitterA.antiNodeOn()
+                                if partTwo {
+                                    tempResult.insert(nodeA)
                                     
-                                    let new = antiNode(coords: locations.0, transmitter: existing.transmitter, isAntinode: true, gridBounds: boundsMax)
+                                    isInBoundsA = isValidGridPosition(gridBounds: boundsMax, location: forward)
+                                    isInBoundsB = isValidGridPosition(gridBounds: boundsMax, location: backward)
+                                }
+                                
+                                while isInBoundsA && partTwo {
+                                    let existing = grid[forward.1][forward.0]
+                                    tempResult.insert(existing.antiNodeOn())
+                                    forward = forward + distance
+                                    isInBoundsA = isValidGridPosition(gridBounds: boundsMax, location: forward)
+                                }
+                                
+                                while isInBoundsB && partTwo {
+                                    let existing = grid[backward.1][backward.0]
+                                    tempResult.insert(existing.antiNodeOn())
+                                    backward = backward - distance
+                                    isInBoundsB = isValidGridPosition(gridBounds: boundsMax, location: backward)
+                                }
+                                
+                                if isInBoundsA && !partTwo {
+                                    let existingA = grid[locations.0.1][locations.0.0]
+                                    let new = antiNode(coords: locations.0, transmitter: existingA.transmitter, isAntinode: true, gridBounds: boundsMax)
                                     tempResult.insert(new)
                                 }
                                 
-                                if isValidGridPosition(gridBounds: boundsMax, location: locations.1) {
-                                    let existing = grid[locations.1.1][locations.1.0]
-                                    
-                                    let new = antiNode(coords: locations.1, transmitter: existing.transmitter, isAntinode: true, gridBounds: boundsMax)
+                                if isInBoundsB && !partTwo {
+                                    let existingB = grid[locations.1.1][locations.1.0]
+                                    let new = antiNode(coords: locations.1, transmitter: existingB.transmitter, isAntinode: true, gridBounds: boundsMax)
                                     tempResult.insert(new)
                                 }
-                            }
                             return tempResult
                         }
                     }
@@ -90,13 +116,8 @@ extension Day8 {
             location.1 >= 0 &&
             location.1 <= gridBounds.1
         {
-            print("location returned true", location)
             return true
         }
-        print("griddbounds :", gridBounds)
-        print("location :", location)
-        print("location x: ", location.0)
-        print("location y: ", location.1)
         return false
     }
     
@@ -125,6 +146,13 @@ extension Day8 {
         func distanceTo(_ other: Location) -> (Int, Int) {
             return (other.x - self.x, other.y - self.y)
         }
+
+        func antiNodeOn() -> Location {
+            Location(x: self.x,
+                     y: self.y,
+                     transmitter: self.transmitter,
+                     isAntinode: true)
+        }
         
         func antiNodeLocationsFor(_ other: Location) -> ((Int, Int), (Int, Int)) {
             let distance = self.distanceTo(other)
@@ -133,4 +161,16 @@ extension Day8 {
             return (first, second)
         }
     }
+}
+
+infix operator + : AdditionPrecedence
+
+func + (lhs: (Int, Int), rhs: (Int, Int)) -> (Int, Int) {
+    (lhs.0 + rhs.0, lhs.1 + rhs.1)
+}
+
+infix operator - : AdditionPrecedence
+
+func - (lhs: (Int, Int), rhs: (Int, Int)) -> (Int, Int) {
+    (lhs.0 - rhs.0, lhs.1 - rhs.1)
 }
