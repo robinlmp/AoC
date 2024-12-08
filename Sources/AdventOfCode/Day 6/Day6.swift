@@ -169,7 +169,7 @@ extension Day6 {
         var tempGrid = grid
         
         while isMoving {
-            guard let guardPosition = try? currentPosition(grid: tempGrid) else {
+            guard let guardPosition = currentPosition(grid: tempGrid) else {
                 throw GridError.currentPosition
             }
             
@@ -193,7 +193,7 @@ extension Day6 {
     func movePosition(grid: [Position]) throws -> [Position]? {
         var tempGrid = grid
         
-        guard let currentPosition = try? currentPosition(grid: tempGrid) else {
+        guard let currentPosition = currentPosition(grid: tempGrid) else {
             return nil
         }
         
