@@ -69,13 +69,8 @@ extension Day9 {
                       let fileRange = blocks.ranges(of: file).last else { return }
 
                 if emptyRange.lowerBound < fileRange.lowerBound {
-                    for i in emptyRange.indices {
-                        blocks[i] = file[0]
-                    }
-                    
-                    for i in fileRange {
-                        blocks[i] = emptyBlocksFor(count: 1).first!
-                    }
+                    blocks.replaceSubrange(emptyRange, with: file)
+                    blocks.replaceSubrange(fileRange, with: emptyBlocksFor(count: file.count))
                 }
         }
         
