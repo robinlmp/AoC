@@ -14,6 +14,7 @@ struct Day9: Solution {
     let input: [Int]
     let chunks: [[Int]]
     let blocks: [Block]
+    let filesAndGaps: [[Block]]
     
     init(input: String) {
         self.input = input
@@ -39,6 +40,10 @@ struct Day9: Solution {
                     Block(id: nil)
                 }
             }
+        
+        self.filesAndGaps = blocks.chunked(on: \.id).map {
+            return Array($0.1)
+        }
     }
     
     func calculatePartOne() -> Int {
@@ -47,7 +52,8 @@ struct Day9: Solution {
     }
     
     func calculatePartTwo() -> Int {
-        0
+        let blocks = moveFiles(blocks)
+        return calculateChecksum(blocks)
     }
 }
 
@@ -58,6 +64,37 @@ extension Day9 {
             .map {
                 $0 * ($1.id ?? 0)
             }.reduce(0, +)
+    }
+    
+    func moveFiles(_ blocks: [Block]) -> [Block] {
+        let files = filesAndGaps.filter {
+            $0.map(\.id).contains(nil) == false
+        }.reversed()
+        var blocks: [Block] = blocks
+        
+        files
+            .forEach { file in
+                guard let emptyRange = blocks.firstRange(of: emptyBlocksFor(count: file.count)),
+                      let fileRange = blocks.ranges(of: file).last else { return }
+
+                if emptyRange.lowerBound < fileRange.lowerBound {
+                    for i in emptyRange.indices {
+                        blocks[i] = file[0]
+                    }
+                    
+                    for i in fileRange {
+                        blocks[i] = emptyBlocksFor(count: 1).first!
+                    }
+                }
+        }
+        
+        return blocks
+    }
+    
+    func emptyBlocksFor(count: Int) -> [Block] {
+        (0..<count).map { _ in
+            Block(id: nil)
+        }
     }
     
     func moveBlocks(_ blocks: [Block]) -> [Block] {
