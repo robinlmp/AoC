@@ -4,15 +4,13 @@ struct Day9: Solution {
     static let day = 9
     
     struct Block: Hashable, CustomStringConvertible {
+        let id: Int?
         var description: String {
             id != nil ? "\(id!)" : "."
         }
-        
-        let id: Int?
     }
     
     let input: [Int]
-    let chunks: [[Int]]
     let blocks: [Block]
     let filesAndGaps: [[Block]]
     
@@ -20,13 +18,6 @@ struct Day9: Solution {
         self.input = input
             .compactMap {
                 Int(String($0))
-            }
-        
-        self.chunks = self
-            .input
-            .chunks(ofCount: 2)
-            .compactMap {
-                $0.compactMap(Int.init)
             }
    
         self.blocks = self.input
